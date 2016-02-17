@@ -40,7 +40,7 @@ __C.TRAIN = edict()
 # __C.TRAIN.SCALES = (600,)
 
 # Max pixel size of the longest side of a scaled input image
- __C.TRAIN.MAX_SIZE = 1000
+# __C.TRAIN.MAX_SIZE = 1000
 
 # Images to use per minibatch
 # __C.TRAIN.IMS_PER_BATCH = 2
@@ -49,10 +49,10 @@ __C.TRAIN = edict()
 # __C.TRAIN.BATCH_SIZE = 128
 
 # Fraction of minibatch that is labeled foreground (i.e. class > 0)
- __C.TRAIN.FG_FRACTION = 0.25
+# __C.TRAIN.FG_FRACTION = 0.25
 
 # Overlap threshold for a ROI to be considered foreground (if >= FG_THRESH)
- __C.TRAIN.FG_THRESH = 0.5
+# __C.TRAIN.FG_THRESH = 0.5
 
 # Overlap threshold for a ROI to be considered background (class = 0 if
 # overlap in [LO, HI))
@@ -64,11 +64,20 @@ __C.TRAIN = edict()
 # Each scale is the pixel size of an image's shortest side
 __C.TRAIN.SCALES          = (600,500,700,400,800) #(600,500,700,)
 
+# Max pixel size of the longest side of a scaled input image
+__C.TRAIN.MAX_SIZE = 1000
+
 # Images to use per minibatch
 __C.TRAIN.IMS_PER_BATCH   = 16 #8 # 2
 
 # Minibatch size (number of regions of interest [ROIs])
 __C.TRAIN.BATCH_SIZE      = 512 #256 # 128
+
+# Fraction of minibatch that is labeled foreground (i.e. class > 0)
+__C.TRAIN.FG_FRACTION = 0.25
+
+# Overlap threshold for a ROI to be considered foreground (if >= FG_THRESH)
+__C.TRAIN.FG_THRESH = 0.5
 
 # Overlap threshold for a ROI to be considered background (class = 0 if
 # overlap in [LO, HI))
