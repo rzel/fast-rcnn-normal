@@ -50,6 +50,7 @@ for i in xrange(layer_num):
 	assert(param_num == 1)
 	now_num = int(f.readline())
 	assert(now_num == bias_dims[0])
+	read_dim = int(read_dim)
 
 	f2 = open(filename_weight, 'r')
 
