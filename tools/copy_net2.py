@@ -50,16 +50,15 @@ for i in xrange(layer_num):
 	assert(param_num == 1)
 	now_num = int(f.readline())
 	assert(now_num == bias_dims[0])
-	read_dim = int(read_dim)
 
 	f2 = open(filename_weight, 'r')
 
 	input_data = np.zeros(read_dim)
 
-	for b in xrange(read_dim[0]):
-		for c in xrange(read_dim[1]):
-			for h in xrange(read_dim[2]):
-				for w in xrange(read_dim[3]):
+	for b in xrange(int(read_dim[0])):
+		for c in xrange(int(read_dim[1])):
+			for h in xrange(int(read_dim[2])):
+				for w in xrange(int(read_dim[3])):
 					input_data[b][c][h][w] = float(f2.readline())
 
 	for b in xrange(weight_dims[0]):
