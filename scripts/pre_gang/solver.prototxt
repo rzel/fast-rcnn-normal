@@ -1,4 +1,4 @@
-train_net: "/nfs.yoda/xiaolonw/fast_rcnn/fast-rcnn-distillation/scripts/pre_gang/train.prototxt"
+train_net: "/nfs.yoda/xiaolonw/fast_rcnn/fast-rcnn-normal/scripts/pre_gang/train.prototxt"
 
 base_lr: 0.01
 lr_policy: "step"
