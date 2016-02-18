@@ -1,8 +1,8 @@
 name: "CaffeNet"
-input: "data_1"
+input: "data"
 input_shape {
   dim: 1
-  dim: 6
+  dim: 3
   dim: 227
   dim: 227
 }
@@ -16,7 +16,7 @@ input_shape {
 
 
 layer {
-  name: "da_conv1" type: "Convolution" bottom: "data_1" top: "da_conv1"
+  name: "da_conv1" type: "Convolution" bottom: "data" top: "da_conv1"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   convolution_param { num_output: 64 kernel_size: 5 pad: 2 stride: 2
@@ -24,11 +24,20 @@ layer {
     bias_filler { type: "constant" value: 0 } 
   }
 }
+
 layer {
-  name: "da_relu1" type: "ReLU" bottom: "da_conv1" top: "da_conv1" 
+  name: "bn1"
+  type: "BatchNorm"
+  bottom: "da_conv1"
+  top: "bn1"
+}
+
+
+layer {
+  name: "da_relu1" type: "ReLU" bottom: "bn1" top: "bn1" 
 }
 layer {
-  name: "da_pool1" type: "Pooling" bottom: "da_conv1" top: "da_pool1"
+  name: "da_pool1" type: "Pooling" bottom: "bn1" top: "da_pool1"
   pooling_param { pool: MAX kernel_size: 3 pad: 0 stride: 2 }
 }
 layer {
@@ -40,11 +49,19 @@ layer {
     bias_filler { type: "constant" value: 1 } 
   }
 }
+
+layer {
+  name: "bn2"
+  type: "BatchNorm"
+  bottom: "da_conv2"
+  top: "bn2"
+}
+
 layer { 
-  name: "da_relu2" type: "ReLU" bottom: "da_conv2" top: "da_conv2"  
+  name: "da_relu2" type: "ReLU" bottom: "bn2" top: "bn2"  
 }
 layer {
-  name: "da_pool2" type: "Pooling" bottom: "da_conv2" top: "da_pool2"
+  name: "da_pool2" type: "Pooling" bottom: "bn2" top: "da_pool2"
   pooling_param { pool: MAX kernel_size: 3 pad: 0 stride: 2 }
 }
 layer {
@@ -56,11 +73,19 @@ layer {
     bias_filler { type: "constant" value: 0 } 
   }
 }
+
 layer {
-  name: "da_relu3" type: "ReLU" bottom: "da_conv3" top: "da_conv3" 
+  name: "bn3"
+  type: "BatchNorm"
+  bottom: "da_conv3"
+  top: "bn3"
+}
+
+layer {
+  name: "da_relu3" type: "ReLU" bottom: "bn3" top: "bn3" 
 }
 layer {
-  name: "da_conv4" type: "Convolution" bottom: "da_conv3" top: "da_conv4"
+  name: "da_conv4" type: "Convolution" bottom: "bn3" top: "da_conv4"
   param { lr_mult: 1 decay_mult: 1}
   param { lr_mult: 2 decay_mult: 0 }
   convolution_param { num_output: 512 kernel_size: 3 pad: 1 stride: 1 
@@ -68,11 +93,19 @@ layer {
     bias_filler { type: "constant" value: 1 } 
   }
 }
+
 layer {
-  name: "da_relu4" type: "ReLU" bottom: "da_conv4" top: "da_conv4" 
+  name: "bn4"
+  type: "BatchNorm"
+  bottom: "da_conv4"
+  top: "bn4"
+}
+
+layer {
+  name: "da_relu4" type: "ReLU" bottom: "bn4" top: "bn4" 
 }
 layer {
-  name: "da_conv5" type: "Convolution" bottom: "da_conv4" top: "da_conv5"
+  name: "da_conv5" type: "Convolution" bottom: "bn4" top: "da_conv5"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   convolution_param { num_output: 512 kernel_size: 3 pad: 1 stride: 1
@@ -80,14 +113,23 @@ layer {
     bias_filler { type: "constant" value: 1 } 
   }
 }
+
 layer {
-  name: "da_relu5" type: "ReLU" bottom: "da_conv5" top: "da_conv5" 
+  name: "bn5"
+  type: "BatchNorm"
+  bottom: "da_conv5"
+  top: "bn5"
+}
+
+
+layer {
+  name: "da_relu5" type: "ReLU" bottom: "bn5" top: "bn5" 
 }
 
 layer {
   name: "da_roi_pool5"
   type: "ROIPooling"
-  bottom: "da_conv5"
+  bottom: "bn5"
   bottom: "rois"
   top: "da_pool5"
   roi_pooling_param {

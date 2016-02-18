@@ -93,11 +93,19 @@ layer {
     bias_filler { type: "constant" value: 1 } 
   }
 }
+
 layer {
-  name: "da_relu4" type: "ReLU" bottom: "da_conv4" top: "da_conv4" 
+  name: "bn4"
+  type: "BatchNorm"
+  bottom: "da_conv4"
+  top: "bn4"
+}
+
+layer {
+  name: "da_relu4" type: "ReLU" bottom: "bn4" top: "bn4" 
 }
 layer {
-  name: "da_conv5" type: "Convolution" bottom: "da_conv4" top: "da_conv5"
+  name: "da_conv5" type: "Convolution" bottom: "bn4" top: "da_conv5"
   param { lr_mult: 1 decay_mult: 1 }
   param { lr_mult: 2 decay_mult: 0 }
   convolution_param { num_output: 512 kernel_size: 3 pad: 1 stride: 1
