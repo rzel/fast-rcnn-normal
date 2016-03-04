@@ -102,6 +102,9 @@ layer {
 }
 
 
+layer {
+  name: "relu4" type: "ReLU" bottom: "bn4" top: "bn4" 
+}
 
 layer {
   name: "roi_pool5"
