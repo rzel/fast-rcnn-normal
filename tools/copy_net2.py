@@ -12,7 +12,7 @@ import numpy as np
 
 caffe.set_mode_cpu()
 net = caffe.Net('/nfs.yoda/xiaolonw/fast_rcnn/fast-rcnn-normal/scripts/dcgan_norm/train.prototxt', caffe.TRAIN)
-headfile = '/nfs.yoda/xiaolonw/torch_projects/weights2/head_r.txt'
+headfile = '/nfs.yoda/xiaolonw/torch_projects/weights6/head_r.txt'
 f = open(headfile, 'r')
 
 savename = '/nfs.yoda/xiaolonw/fast_rcnn/models/dcgan_norm/fast_rcnn_zero.caffemodel'
